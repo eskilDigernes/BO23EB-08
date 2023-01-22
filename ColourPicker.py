@@ -36,8 +36,8 @@ def stackImages(scale, imgArray): # see ch6 for explanation
         ver=hor
     return ver
 
-#path = 'resources/redspots/gopro/redGoPro1.png' # path to image
-path = 'resources/redspots/iPhone/rediPhone1.png' # path to image
+path = 'resources/redspots/gopro/redGoPro1.png' # path to image
+#path = 'resources/redspots/iPhone/rediPhone1.png' # path to image
 
 cv2.namedWindow('TrackBars') # create a window for trackbars
 cv2.resizeWindow('TrackBars', 640, 240) # resize the window to 640x240
@@ -46,19 +46,12 @@ cv2.resizeWindow('TrackBars', 640, 240) # resize the window to 640x240
 # "Important! Define these values FIRST.
 # find the values for your image using the trackbars. and then place them here.
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-# cv2.createTrackbar('Hue Min', 'TrackBars', 0, 163, empty)
-# cv2.createTrackbar('Hue Max', 'TrackBars', 179, 179, empty)
-# cv2.createTrackbar('Sat Min', 'TrackBars', 0, 158, empty)
-# cv2.createTrackbar('Sat Max', 'TrackBars', 255, 255, empty)
-# cv2.createTrackbar('Val Min', 'TrackBars', 0, 39, empty)
-# cv2.createTrackbar('Val Max', 'TrackBars', 144, 255, empty)
 
-#for untitled1.png
-cv2.createTrackbar('Hue Min', 'TrackBars', 150, 179, empty)
+cv2.createTrackbar('Hue Min', 'TrackBars', 165, 179, empty)
 cv2.createTrackbar('Hue Max', 'TrackBars', 179, 179, empty)
-cv2.createTrackbar('Sat Min', 'TrackBars',48, 255, empty)
+cv2.createTrackbar('Sat Min', 'TrackBars',119, 255, empty)
 cv2.createTrackbar('Sat Max', 'TrackBars', 255, 255, empty)
-cv2.createTrackbar('Val Min', 'TrackBars', 44, 255, empty)
+cv2.createTrackbar('Val Min', 'TrackBars', 41, 255, empty)
 cv2.createTrackbar('Val Max', 'TrackBars', 243, 255, empty)
 
 while True: # create a loop to keep the trackbars open
