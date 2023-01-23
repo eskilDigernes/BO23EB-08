@@ -36,8 +36,9 @@ def stackImages(scale, imgArray): # see ch6 for explanation
         ver=hor
     return ver
 
-path = 'resources/redspots/gopro/redGoPro1.png' # path to image
-#path = 'resources/redspots/iPhone/rediPhone1.png' # path to image
+#path = 'resources/redspots/gopro/redGoPro1.png' # path to image
+path = 'resources/redspots/iPhone/rediPhone1.png' # path to image
+#path = 'resources/redspots/iPhone/rediPhone2.png' # path to image
 
 cv2.namedWindow('TrackBars') # create a window for trackbars
 cv2.resizeWindow('TrackBars', 640, 240) # resize the window to 640x240
