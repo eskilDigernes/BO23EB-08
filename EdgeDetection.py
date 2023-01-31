@@ -17,7 +17,7 @@ def draw_contours(img):
     approx = cv2.approxPolyDP(cnt, 0.004 * peri, True)
     cv2.drawContours(img, [approx], -1, (255, 255, 0), 2)
 
-img = cv2.imread(r"C:\Users\Asbjo\Documents\Skule\ELE350 bachelor\Computer-Vision-with-Python\testbilde_begrensa.jpg")
+img = cv2.imread(r"Resources\blackspots\iphone\testbilde_begrensa.jpg")
 h, w, c = img.shape
 
 img = cv2.resize(img, (w // 2, h // 2))
