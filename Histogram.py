@@ -10,7 +10,7 @@ for i,col in enumerate(colour):
     histr = cv2.calcHist([img],[i],None,[256],[0,256])
     plt.plot(histr,color = col)
     plt.xlim([0,256])
-plt.title('Histogram of red hotspots')
+plt.title('Histogram of red hot spots')
 plt.grid(True, linestyle='--')
 plt.show()
 
