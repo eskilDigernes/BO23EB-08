@@ -84,7 +84,7 @@ while True: # create a loop to keep the trackbars open
 
 
 
-    imgStack = stackImages(.6, ([img, imgHSV, mask, imgResult]))
+    imgStack = stackImages(.6, ([img, imgHSV, mask]))
     cv2.imshow("Stacked Images", imgStack)
     # cv2.imshow('Original', img)
 
