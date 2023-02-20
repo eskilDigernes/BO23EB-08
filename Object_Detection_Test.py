@@ -20,5 +20,5 @@ for img in image_paths:
 for img in image_paths:
     results = model_stian(img)
     results.show()  # or .show(), .save(), .crop(), .pandas(), etc.
-    ##############################
+
 
