@@ -9,13 +9,15 @@ image_paths = [
     'Resources\Full_Image_set\IMG_3258.jpg',
     'Resources\Full_Image_set\IMG_3273.jpg',
     'Resources\Full_Image_set\GOPR0125.jpg',
-    'Resources\Full_Image_set\IMG_7438.jpg'
+    'Resources\Full_Image_set\IMG_7438.jpg',
+    'Resources\Full_Image_set\IMG_3282.jpg',
+    'Resources\Full_Image_set\IMG_3284.jpg',
 ]
 
 # Show results ASBJORN
-# for img in image_paths:
-#     results = model_asbjorn(img)
-#     results.show()
+for img in image_paths:
+    results = model_asbjorn(img)
+    results.show()
 
 # Show results STIAN
 for img in image_paths:
