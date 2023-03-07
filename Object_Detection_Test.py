@@ -19,8 +19,11 @@ model_stian = torch.hub.load('ultralytics/yolov5', 'custom', 'weight_all.pt')
 
 iterator = islice(image_list, 3)
 for img in iterator:
-    results = model_asbjorn(img)
-    results.show()
-    results.save('Resources\Results')   
+    results_asbjorn = model_asbjorn(img)
+    results_stian = model_stian(img)
+    results_asbjorn.show()
+    results_stian.show()
+    results_asbjorn.save('Resources\Results')
+    results_stian.save('Resources\Results')
 
 
