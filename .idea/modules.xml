@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/BO23EB-08.iml" filepath="$PROJECT_DIR$/.idea/BO23EB-08.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ing301project-gruppe7/.idea/ing301project-gruppe7.iml" filepath="$PROJECT_DIR$/../ing301project-gruppe7/.idea/ing301project-gruppe7.iml" />
       <module fileurl="file://$PROJECT_DIR$/../ING301/ing301public/.idea/ing301public.iml" filepath="$PROJECT_DIR$/../ING301/ing301public/.idea/ing301public.iml" />
       <module fileurl="file://$PROJECT_DIR$/../projectING301Group6/.idea/projectING301Group6.iml" filepath="$PROJECT_DIR$/../projectING301Group6/.idea/projectING301Group6.iml" />
     </modules>

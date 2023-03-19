@@ -36,8 +36,11 @@ def stackImages(scale, imgArray): # see ch6 for explanation
         ver=hor
     return ver
 
-#path = 'resources/Full_Image_set/IMg_74325'
+#path = 'resources/Full_Image_set/IMG_7434.jpg'
+#path = 'resources/Full_Image_set/IMG_3282.jpg'
+#path = 'resources/Full_Image_set/IMG_7428.jpg'
 path = 'resources/Full_Image_set/IMG_3260.jpg'
+
 
 
 
@@ -85,7 +88,7 @@ while True: # create a loop to keep the trackbars open
 
 
 
-    imgStack = stackImages(.6, ([img, imgHSV, mask]))
+    imgStack = stackImages(.2, ([img, imgHSV, mask]))
     cv2.imshow("Stacked Images", imgStack)
     # cv2.imshow('Original', img)
 

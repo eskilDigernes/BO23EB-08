@@ -6,6 +6,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="ing301public" />
     <orderEntry type="module" module-name="projectING301Group6" />
+    <orderEntry type="module" module-name="ing301project-gruppe7" />
   </component>
   <component name="PyDocumentationSettings">
     <option name="renderExternalDocumentation" value="true" />
