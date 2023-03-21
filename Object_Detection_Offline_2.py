@@ -58,8 +58,8 @@ results = non_max_suppression(outputs, conf_threshold, nms_threshold)
 
 # Create a dictionary to map class names to their corresponding BGR colors
 class_colors = {
-    'Redspot': (255, 0, 0),  # Red in RGB
-    'Blackspot': (250, 128, 114)  # Salmon in RGB
+    'Red spot': (255, 0, 0),  # Red in RGB
+    'Black spot': (250, 128, 114)  # Salmon in RGB
 }
 
 # Visualize the results
