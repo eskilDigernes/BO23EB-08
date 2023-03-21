@@ -61,7 +61,7 @@ class_colors = {
     'Red spot': (255, 0, 0),  # Red in RGB
     'Black spot': (250, 128, 114), # Salmon in RGB
     'Nipple': (245, 197, 66),  # Orange in RGB
-    'Point flame': (224, 198, 67),  # Yellow in RGB
+    'Point flame': (182, 48, 209),  # Purple in RGB
     'Extraction point': (0, 255, 0),  # Green in RGB
 }
 
