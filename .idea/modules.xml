@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/../ing301project-gruppe7/.idea/ing301project-gruppe7.iml" filepath="$PROJECT_DIR$/../ing301project-gruppe7/.idea/ing301project-gruppe7.iml" />
       <module fileurl="file://$PROJECT_DIR$/../ING301/ing301public/.idea/ing301public.iml" filepath="$PROJECT_DIR$/../ING301/ing301public/.idea/ing301public.iml" />
       <module fileurl="file://$PROJECT_DIR$/../projectING301Group6/.idea/projectING301Group6.iml" filepath="$PROJECT_DIR$/../projectING301Group6/.idea/projectING301Group6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../yolov5/.idea/yolov5.iml" filepath="$PROJECT_DIR$/../yolov5/.idea/yolov5.iml" />
     </modules>
   </component>
 </project>
