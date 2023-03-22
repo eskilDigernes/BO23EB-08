@@ -7,7 +7,7 @@ from utils.general import non_max_suppression, scale_coords
 from utils.torch_utils import select_device
 
 # Load the YOLOv5 model
-weights = 'weight_all.pt'
+weights = 'best.pt'
 device = select_device('cpu')  # or 'cuda:0' for GPU
 model = attempt_load(weights, device)
 
@@ -15,7 +15,7 @@ model = attempt_load(weights, device)
 model.eval()
 
 # Define the classes
-classes = ['Red spot', 'Black spot', 'Nipple', 'Extraction point', 'Point flame']
+classes = ['Black spot', 'Red spot']
 
 # Define the input image size
 def maintain_aspect_ratio(img, target_size):
@@ -34,7 +34,7 @@ def maintain_aspect_ratio(img, target_size):
 
 # Define the confidence threshold and non-maximum suppression threshold
 conf_threshold = 0.4
-nms_threshold = 0.5
+nms_threshold = 0.1
 
 # Open the input video
 input_video_path = 'Resources\input_video.mp4'
@@ -59,10 +59,7 @@ out = cv2.VideoWriter(output_video_path, fourcc, fps, (frame_width, frame_height
 # Define the class colors
 class_colors = {
     'Red spot': (255, 0, 0),  # Red in RGB
-    'Black spot': (250, 128, 114),  # Salmon in RGB
-    'Nipple': (245, 197, 66),  # Orange in RGB
-    'Point flame': (182, 48, 209),  # Purple in RGB
-    'Extraction point': (0, 255, 0),  # Green in RGB
+    'Black spot': (250, 128, 114)  # Salmon in RGB
 }
 
 # Process the input video frame by frame
