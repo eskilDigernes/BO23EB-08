@@ -51,7 +51,7 @@ frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 fps = int(cap.get(cv2.CAP_PROP_FPS))
 
 # Set up the output video writer
-output_video_path = 'Resources/output_video.mp4'
+output_video_path = 'Resources\output_video.mp4'
 fourcc = cv2.VideoWriter_fourcc(*'mp4v')  # Use 'mp4v' codec for .mp4 video format
 out = cv2.VideoWriter(output_video_path, fourcc, fps, (frame_width, frame_height))
 

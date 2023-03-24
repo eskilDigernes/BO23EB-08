@@ -42,8 +42,8 @@ conf_threshold = 0.5
 nms_threshold = 0.1
 
 # Load the input image
-img = cv2.imread('Resources\Full_image_set_resized\IMG_3260.jpg')
-#img = cv2.imread('Resources\Full_image_set_resized\GOPR0123.jpg')
+#img = cv2.imread('Resources\Full_image_set_resized\IMG_3260.jpg')
+img = cv2.imread('Resources\Full_image_set_resized\GOPR0123.jpg')
 
 
 # Preprocess the input image
