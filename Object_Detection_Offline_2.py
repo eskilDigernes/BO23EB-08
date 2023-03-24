@@ -96,8 +96,6 @@ cv2.destroyAllWindows()
 
 img = cv2.imread('Resources\Full_image_set_resized\IMG_3273.jpg')
 
-
-
 # Preprocess the input image
 img = maintain_aspect_ratio(img, 640)
 cv2.imshow('input',img)
