@@ -29,6 +29,10 @@ def maintain_aspect_ratio(img, target_size):
         new_height = target_size
         new_width = int(new_height * aspect_ratio)
 
+    # Ensure dimensions are multiples of 32
+    new_width = (new_width // 32) * 32
+    new_height = (new_height // 32) * 32
+
     img_resized = cv2.resize(img, (new_width, new_height))
     return img_resized
 
@@ -37,7 +41,7 @@ conf_threshold = 0.4
 nms_threshold = 0.1
 
 # Open the input video
-input_video_path = 'Resources\input_video.mp4'
+input_video_path = 'Resources\GoPro Video\GX010273.MP4'
 cap = cv2.VideoCapture(input_video_path)
 
 # Check if the video file was opened successfully
