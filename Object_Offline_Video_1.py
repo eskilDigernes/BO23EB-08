@@ -29,6 +29,10 @@ def maintain_aspect_ratio(img, target_size):
         new_height = target_size
         new_width = int(new_height * aspect_ratio)
 
+    # Ensure dimensions are multiples of 32
+    new_width = (new_width // 32) * 32
+    new_height = (new_height // 32) * 32
+
     img_resized = cv2.resize(img, (new_width, new_height))
     return img_resized
 
@@ -37,7 +41,9 @@ conf_threshold = 0.4
 nms_threshold = 0.5
 
 # Open the input video
-input_video_path = 'Resources\input_video.mp4'
+#input_video_path = 'Resources\GoPro_Video\GX010282.MP4'
+input_video_path = 'Resources\iPhone_Video\iphone3.mp4'
+
 cap = cv2.VideoCapture(input_video_path)
 
 # Check if the video file was opened successfully
@@ -73,7 +79,7 @@ while True:
         break
 
     # Preprocess the frame
-    img = maintain_aspect_ratio(frame, 640)
+    img = maintain_aspect_ratio(frame, 1080)
     img = img[..., ::-1]  # BGR to RGB
     img = np.ascontiguousarray(img)
 
