@@ -7,7 +7,7 @@ from utils.general import non_max_suppression, scale_coords
 from utils.torch_utils import select_device
 
 # Load the YOLOv5 model
-weights = 'weight_all.pt'
+weights = 'best1440px.pt'
 device = select_device('cpu')  # or 'cuda:0' for GPU
 model = attempt_load(weights, device)
 
@@ -42,7 +42,7 @@ nms_threshold = 0.5
 
 # Open the input video
 #input_video_path = 'Resources\GoPro_Video\GX010282.MP4'
-input_video_path = 'Resources\iPhone_Video\iphone3.mp4'
+input_video_path = 'Resources\input_video.mp4'
 
 cap = cv2.VideoCapture(input_video_path)
 

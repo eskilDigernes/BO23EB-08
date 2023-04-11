@@ -6,7 +6,7 @@ from utils.general import non_max_suppression, scale_coords
 from utils.torch_utils import select_device
 
 # Load the YOLOv5 model
-weights = 'best.pt'
+weights = 'best_v3.pt'
 device = select_device('cpu') # or 'cuda:0' for GPU
 model = attempt_load(weights, device)
 
@@ -14,7 +14,7 @@ model = attempt_load(weights, device)
 model.eval()
 
 # Define the classes
-classes = ['Black spot', 'Red spot']
+classes = ['Black spot', 'Red spot', 'Nipple']
 
 #
 def maintain_aspect_ratio(img, target_size, stride=32):
@@ -70,7 +70,8 @@ results = non_max_suppression(outputs, conf_threshold, nms_threshold)
 # Create a dictionary to map class names to their corresponding BGR colors
 class_colors = {
     'Red spot': (255, 0, 0),  # Red in RGB
-    'Black spot': (250, 128, 114)  # Salmon in RGB
+    'Black spot': (250, 128, 114),  # Salmon in RGB
+    'Nipple': (250, 230, 128)
 }
 
 # Visualize the results

@@ -7,7 +7,7 @@ from utils.general import non_max_suppression, scale_coords
 from utils.torch_utils import select_device
 
 # Load the YOLOv5 model
-weights = 'best.pt'
+weights = 'best_v3.pt'
 device = select_device('cpu')  # or 'cuda:0' for GPU
 model = attempt_load(weights, device)
 
@@ -15,7 +15,7 @@ model = attempt_load(weights, device)
 model.eval()
 
 # Define the classes
-classes = ['Black spot', 'Red spot']
+classes = ['Black spot', 'Red spot', 'Nipple']
 
 # Define the input image size
 def maintain_aspect_ratio(img, target_size):
@@ -42,7 +42,7 @@ nms_threshold = 0.5
 
 # Open the input video
 #input_video_path = 'Resources\GoPro_Video\GX010282.MP4'
-input_video_path = 'Resources\iPhone_Video\iphone3.mp4'
+input_video_path = 'Resources\Iphone8_480p.mp4'
 cap = cv2.VideoCapture(input_video_path)
 
 # Check if the video file was opened successfully
@@ -64,7 +64,8 @@ out = cv2.VideoWriter(output_video_path, fourcc, fps, (frame_width, frame_height
 # Define the class colors
 class_colors = {
     'Red spot': (255, 0, 0),  # Red in RGB
-    'Black spot': (250, 128, 114)  # Salmon in RGB
+    'Black spot': (250, 128, 114),  # Salmon in RGB
+    'Nipple': (255,250, 128)
 }
 
 # Process the input video frame by frame
