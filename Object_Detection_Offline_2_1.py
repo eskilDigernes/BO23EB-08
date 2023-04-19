@@ -17,18 +17,24 @@ model.eval()
 classes = ['Hot spot','Point flame','Stub', 'Tapping hole','Uncovered area']
 
 # Define the input image size
-def maintain_aspect_ratio(img, target_size):
+def maintain_aspect_ratio(img, target_size, stride=32):
     img_height, img_width = img.shape[:2]
     aspect_ratio = img_width / img_height
 
-    if img_width >= img_height:
+    # Check if the image is horizontal or vertical
+    if aspect_ratio >= 1:  # Horizontal
         new_width = target_size
         new_height = int(new_width / aspect_ratio)
-    else:
+    else:  # Vertical
         new_height = target_size
         new_width = int(new_height * aspect_ratio)
 
+    # Ensure dimensions are divisible by stride
+    new_width = (new_width // stride) * stride
+    new_height = (new_height // stride) * stride
+
     img_resized = cv2.resize(img, (new_width, new_height))
+
     return img_resized
 
 # Define the confidence threshold and non-maximum suppression threshold
