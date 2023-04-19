@@ -14,7 +14,7 @@ model = attempt_load(weights, device)
 model.eval()
 
 # Define the classes
-classes = ['Red spot','Black spot','Nipple', 'Extraction point','Point flame']
+classes = ['Hot spot','Point flame','Stub', 'Tapping hole','Uncovered area']
 
 # Define the input image size
 def maintain_aspect_ratio(img, target_size):
@@ -58,11 +58,11 @@ results = non_max_suppression(outputs, conf_threshold, nms_threshold)
 
 # Create a dictionary to map class names to their corresponding BGR colors
 class_colors = {
-    'Red spot': (255, 0, 0),  # Red in RGB
-    'Black spot': (250, 128, 114), # Salmon in RGB
-    'Nipple': (245, 197, 66),  # Orange in RGB
+    'Hot spot': (255, 0, 0),  # Red in RGB
+    'Uncovered area': (250, 128, 114), # Salmon in RGB
+    'Stub': (245, 197, 66),  # Orange in RGB
     'Point flame': (182, 48, 209),  # Purple in RGB
-    'Extraction point': (0, 255, 0),  # Green in RGB
+    'Tapping hole': (0, 255, 0),  # Green in RGB
 }
 
 # Visualize the results
