@@ -38,12 +38,14 @@ def maintain_aspect_ratio(img, target_size, stride=32):
     return img_resized
 
 # Define the confidence threshold and non-maximum suppression threshold
-conf_threshold = 0.5
-nms_threshold = 0.1
+# conf_threshold = 0.5
+# nms_threshold = 0.1
+conf_threshold = 0.4
+nms_threshold = 0.5
 
 # Load the input image
 #img = cv2.imread('Resources\Full_image_set_resized\IMG_3260.jpg')
-img = cv2.imread('Resources\Full_image_set_resized\GOPR0123.jpg')
+img = cv2.imread('Resources\Full_image_set_resized\GOPR0110.jpg')
 
 
 # Preprocess the input image

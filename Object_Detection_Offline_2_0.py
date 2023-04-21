@@ -6,7 +6,7 @@ from utils.general import non_max_suppression, scale_coords
 from utils.torch_utils import select_device
 
 # Load the YOLOv5 model
-weights = 'best1440px.pt'
+weights = 'weight_all.pt'
 device = select_device('cpu') # or 'cuda:0' for GPU
 model = attempt_load(weights, device)
 
@@ -14,7 +14,7 @@ model = attempt_load(weights, device)
 model.eval()
 
 # Define the classes
-classes = ['Hot spot','Point flame','Stub', 'Tapping hole','Uncovered area']
+classes = ['Hot spot','Uncovered area','Stub','Tapping hole','Point flame']
 
 # Define the input image size
 def maintain_aspect_ratio(img, target_size, stride=32):
@@ -42,7 +42,7 @@ conf_threshold = 0.4
 nms_threshold = 0.5
 
 # Load the input image
-img = cv2.imread('Resources\Full_image_set\GOPR0117.jpg')
+img = cv2.imread('Resources\Full_image_set_resized\GOPR0110.jpg')
 
 # Preprocess the input image
 img = maintain_aspect_ratio(img, 640)
