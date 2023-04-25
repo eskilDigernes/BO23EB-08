@@ -38,8 +38,6 @@ def maintain_aspect_ratio(img, target_size, stride=32):
     return img_resized
 
 # Define the confidence threshold and non-maximum suppression threshold
-# conf_threshold = 0.5
-# nms_threshold = 0.1
 conf_threshold = 0.4
 nms_threshold = 0.5
 
