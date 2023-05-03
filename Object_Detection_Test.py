@@ -4,8 +4,8 @@ import glob
 from itertools import islice
 
 # Models
-model_asbjorn = torch.hub.load('ultralytics/yolov5', 'custom', 'best.pt')
-model_stian = torch.hub.load('ultralytics/yolov5', 'custom', 'weight_all.pt')
+model_asbjorn = torch.hub.load('ultralytics/yolov5', 'custom', 'V10.pt')
+model_stian = torch.hub.load('ultralytics/yolov5', 'custom', 'V20.pt')
 
     
 image_list = []
@@ -14,8 +14,8 @@ for filename in glob.glob('Resources\Full_image_set_resized/*.jpg'): #assuming j
     image_list.append(im)
     
 # Model
-model_asbjorn = torch.hub.load('ultralytics/yolov5', 'custom', 'best.pt')
-model_stian = torch.hub.load('ultralytics/yolov5', 'custom', 'weight_all.pt')
+model_asbjorn = torch.hub.load('ultralytics/yolov5', 'custom', 'V10.pt')
+model_stian = torch.hub.load('ultralytics/yolov5', 'custom', 'V20.pt')
 
 iterator = islice(image_list, len(image_list))
 for img in iterator:

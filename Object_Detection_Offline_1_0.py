@@ -6,7 +6,7 @@ from utils.general import non_max_suppression, scale_coords
 from utils.torch_utils import select_device
 
 # Load the YOLOv5 model
-weights = 'best.pt'
+weights = 'V10.pt'
 device = select_device('cpu') # or 'cuda:0' for GPU
 model = attempt_load(weights, device)
 
@@ -141,7 +141,7 @@ from utils.general import non_max_suppression, scale_coords
 from utils.torch_utils import select_device
 
 # Load the YOLOv5 model
-weights = 'best.pt'
+weights = 'V10.pt'
 device = select_device('cpu') # or 'cuda:0' for GPU
 model = attempt_load(weights, device)
 

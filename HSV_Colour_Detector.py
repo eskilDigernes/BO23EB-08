@@ -36,10 +36,22 @@ def stackImages(scale, imgArray): # see ch6 for explanation
         ver=hor
     return ver
 
+# Add your image names to the list
+# image_names = [
+
+#     "GOPR0117",
+#     "GOPR0125",
+#     "IMG_3260",
+#     "IMG_3273",
+#     "IMG_3282",
+#     "IMG_7437",
+# ]
+
+
 #path = 'resources/Full_Image_set/IMG_7434.jpg'
 #path = 'resources/Full_Image_set/IMG_3282.jpg'
 #path = 'resources/Full_Image_set/IMG_7428.jpg'
-path = 'resources/Full_Image_set/IMG_3245.jpg'
+path = 'resources/Full_Image_set/IMG_3260WhiteOff.jpg'
 
 
 

@@ -17,7 +17,7 @@ def draw_contours(img):
     approx = cv2.approxPolyDP(cnt, 0.004 * peri, True)
     cv2.drawContours(img, [approx], -1, (255, 255, 0), 2)
 
-path = r'C:\Users\Asbjo\Documents\GitHub\BO23EB-08\Resources\testbilde.jpg'
+path = 'Resources/Full_image_set_resized/IMG_3273.jpg'
 img = cv2.imread(path)
 h, w, c = img.shape
 

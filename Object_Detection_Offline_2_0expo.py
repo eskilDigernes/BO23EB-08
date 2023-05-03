@@ -6,7 +6,7 @@ from utils.general import non_max_suppression, scale_coords
 from utils.torch_utils import select_device
 
 # Load the YOLOv5 model
-weights = 'V21.pt'
+weights = 'V20.pt'
 device = select_device('cpu') # or 'cuda:0' for GPU
 model = attempt_load(weights, device)
 
@@ -14,7 +14,7 @@ model = attempt_load(weights, device)
 model.eval()
 
 # Define the classes
-classes = ['Hot spot','Point flame','Stub', 'Tapping hole','Uncovered area']
+classes = ['Hot spot','Uncovered area','Stub','Tapping hole','Point flame']
 
 # Define the input image size
 def maintain_aspect_ratio(img, target_size, stride=32):
@@ -42,12 +42,18 @@ conf_threshold = 0.4
 nms_threshold = 0.5
 
 # Load the input image
-#img = cv2.imread('Resources\Full_image_set\IMG_3326.jpg')
-#img = cv2.imread('Resources\Full_image_set\IMG_3318.jpg')
-#img = cv2.imread('Resources\Full_image_set\IMG_3328.jpg')
-img = cv2.imread('Resources\Full_image_set\IMG_3260.jpg')
+img= cv2.imread('Resources\Full_image_set\GOPR0110.JPG')
+#img = cv2.imread('Resources\Full_image_set\GOPR0117.JPG')
+#img = cv2.imread('Resources\Full_image_set\GOPR0125.jpg')
+#img = cv2.imread('Resources\Full_image_set\IMG_3260.jpg')
+#img = cv2.imread('Resources\Full_image_set\IMG_3273.jpg')
+#img = cv2.imread('Resources\Full_image_set\IMG_3282.jpg')
+#img = cv2.imread('Resources\Full_image_set\IMG_7437.jpg')
+
+
+
 # Preprocess the input image
-img = maintain_aspect_ratio(img, 640)
+img = maintain_aspect_ratio(img, 720)
 img = img[..., ::-1]  # BGR to RGB
 img = np.ascontiguousarray(img)
 
@@ -72,17 +78,26 @@ class_colors = {
     'Point flame': (182, 48, 209),  # Purple in RGB
     'Tapping hole': (0, 255, 0),  # Green in RGB
 }
-
-# Visualize the results
 for result in results:
     if result is not None:
         result[:, :4] = scale_coords(img.shape[2:], result[:, :4], img.shape[2:]).round()
         for x1, y1, x2, y2, conf, cls in result:
             label = classes[int(cls)]
-            print(f'{label}: {conf:.2f}')
+            conf_percent = conf * 100  # Convert confidence to percentage
+            print(f'{label}: {conf_percent:.1f}%')
             color = class_colors[label]  # Get the color for the current class label
-            cv2.rectangle(img_vis, (int(x1), int(y1)), (int(x2), int(y2)), color, 1)
-            cv2.putText(img_vis, f'{label}: {conf:.2f}', (int(x1), int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.75, color, 1, cv2.LINE_AA)
+            cv2.rectangle(img_vis, (int(x1), int(y1)), (int(x2), int(y2)), color, 2)
+
+            # Create a background rectangle for the text
+            (text_width, text_height), _ = cv2.getTextSize(f'{label}: {conf_percent:.1f}%',
+                                                           cv2.FONT_HERSHEY_SIMPLEX, 0.50, 1)
+            cv2.rectangle(img_vis, (int(x1), int(y1) - text_height), (int(x1) + text_width, int(y1)),
+                          color, -1)
+
+            # Put the white text on the background rectangle
+            cv2.putText(img_vis, f'{label}: {conf_percent:.1f}%', (int(x1), int(y1)), cv2.FONT_HERSHEY_SIMPLEX,
+                        0.50,
+                        (255, 255, 255), 1, cv2.LINE_AA)
 
 # Show the output image
 cv2.imshow('output', img_vis[...,::-1])
