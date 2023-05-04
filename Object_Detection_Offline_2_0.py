@@ -52,6 +52,7 @@ image_paths = [
     'Resources\Full_image_set\IMG_7437.JPG'
 ]
 
+# Loop through all the images
 for image_path in image_paths:
     # Load the input image
     img = cv2.imread(image_path)
@@ -62,6 +63,7 @@ for image_path in image_paths:
     img = np.ascontiguousarray(img)
 
     # Convert the input image to a tensor
+    img_original = img.copy()  # Create a copy of the original image
     img_vis = img.copy()  # Create a copy of the original image for visualization
     img = img.transpose((2, 0, 1))  # Move channels to the first dimension
     img = torch.from_numpy(img).to(device)
@@ -73,6 +75,9 @@ for image_path in image_paths:
     # Run object detection on the input image
     outputs = model(img)
     results = non_max_suppression(outputs, conf_threshold, nms_threshold)
+
+    # Add "Before" label to the original image
+    cv2.putText(img_original, "Detection: OFF", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
 
     # Create a dictionary to map class names to their corresponding BGR colors
     class_colors = {
@@ -94,8 +99,14 @@ for image_path in image_paths:
                 cv2.putText(img_vis, f'{label}: {conf:.2f}', (int(x1), int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.75,
                             color, 1, cv2.LINE_AA)
 
-    # Show the output image
-    cv2.imshow(f'output - {image_path}', img_vis[..., ::-1])
+    # Add "After" label to the image with object detection
+    cv2.putText(img_vis, "Detection: ON", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+
+    # Concatenate the original image and output image side by side
+    combined_image = cv2.hconcat([img_original[..., ::-1], img_vis[..., ::-1]])
+
+    # Show the combined image
+    cv2.imshow(f'combined - {image_path}', combined_image)
 
     cv2.waitKey()
     cv2.destroyAllWindows()
