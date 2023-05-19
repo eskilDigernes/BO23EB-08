@@ -5,10 +5,17 @@ from models.experimental import attempt_load
 from utils.general import non_max_suppression, scale_coords
 from utils.torch_utils import select_device
 
+
 # Load the YOLOv5 model
 weights = 'V10.pt'
 device = select_device('cpu') # or 'cuda:0' for GPU
 model = attempt_load(weights, device)
+
+
+# Count the number of free and locked parameters
+num_free_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
+num_locked_params = sum(p.numel() for p in model.parameters() if not p.requires_grad)
+
 
 # Set the model to evaluation mode
 model.eval()
@@ -43,13 +50,12 @@ nms_threshold = 0.5
 
 # List of input images
 image_paths = [
-    'Resources\Full_image_set\GOPR0110.JPG',
-    'Resources\Full_image_set\GOPR0117.JPG',
-    'Resources\Full_image_set\GOPR0125.JPG',
     'Resources\Full_image_set\IMG_3260.JPG',
     'Resources\Full_image_set\IMG_3273.JPG',
     'Resources\Full_image_set\IMG_3282.JPG',
-    'Resources\Full_image_set\IMG_7437.JPG'
+    'Resources\Full_image_set\IMG_7437.JPG',
+    'Resources\Full_image_set\GOPR0117.JPG',
+    'Resources\Full_image_set\GOPR0125.JPG'
 ]
 
 # Loop through all the images
