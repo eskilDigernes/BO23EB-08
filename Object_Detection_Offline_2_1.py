@@ -7,12 +7,15 @@ from utils.torch_utils import select_device
 
 # Load the YOLOv5 model
 weights = 'V21.pt'
-device = select_device('cpu') # or 'cuda:0' for GPU
+device = select_device('cuda:0')
+#device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 model = attempt_load(weights, device)
 
 # Count the number of free and locked parameters
-num_free_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
-num_locked_params = sum(p.numel() for p in model.parameters() if not p.requires_grad)
+num_free_params = sum(p.numel()
+    for p in model.parameters() if p.requires_grad)
+num_locked_params = sum(p.numel()
+    for p in model.parameters() if not p.requires_grad)
 
 print('Number of free parameters:', num_free_params)
 print('Number of locked parameters:', num_locked_params)
@@ -21,7 +24,11 @@ print('Number of locked parameters:', num_locked_params)
 model.eval()
 
 # Define the classes
-classes = ['Hot spot','Point flame','Stub', 'Tapping hole','Uncovered area']
+classes = ['Hot spot'
+    ,'Point flame'
+    ,'Stub'
+    ,'Tapping hole'
+    ,'Uncovered area']
 
 # Define the input image size
 def maintain_aspect_ratio(img, target_size, stride=32):
@@ -82,7 +89,9 @@ for image_path in image_paths:
     results = non_max_suppression(outputs, conf_threshold, nms_threshold)
 
     # Add "Before" label to the original image
-    cv2.putText(img_original, "Detection: OFF", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+    cv2.putText(img_original, "Detection: OFF",
+                (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1,
+                (255, 255, 255), 2, cv2.LINE_AA)
 
     # Create a dictionary to map class names to their corresponding BGR colors
     class_colors = {
@@ -101,11 +110,13 @@ for image_path in image_paths:
                 print(f'{label}: {conf:.2f}')
                 color = class_colors[label]  # Get the color for the current class label
                 cv2.rectangle(img_vis, (int(x1), int(y1)), (int(x2), int(y2)), color, 1)
-                cv2.putText(img_vis, f'{label}: {conf:.2f}', (int(x1), int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.75,
+                cv2.putText(img_vis, f'{label}: {conf:.2f}', (int(x1), int(y1) - 10),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.75,
                             color, 1, cv2.LINE_AA)
 
     # Add "After" label to the image with object detection
-    cv2.putText(img_vis, "Detection: ON", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+    cv2.putText(img_vis, "Detection: ON", (10, 30),
+                cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
 
     # Concatenate the original image and output image side by side
     combined_image = cv2.hconcat([img_original[..., ::-1], img_vis[..., ::-1]])

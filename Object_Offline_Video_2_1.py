@@ -1,5 +1,7 @@
 
 import torch
+print(torch.version.cuda)
+
 import cv2
 import numpy as np
 from models.experimental import attempt_load
@@ -8,7 +10,15 @@ from utils.torch_utils import select_device
 
 # Load the YOLOv5 model
 weights = 'V21.pt'
-device = select_device('cpu')  # or 'cuda:0' for GPU
+
+# Get user input
+device_choice = int(input("Enter 1 for GPU, 2 for CPU: "))
+
+# Check if CUDA is available and the user has chosen GPU
+if torch.cuda.is_available() and device_choice == 1:
+    device = select_device('cuda:0')  # Use GPU if available and chosen
+else:
+    device = select_device('cpu')  # Use CPU otherwise
 model = attempt_load(weights, device)
 
 # Set the model to evaluation mode

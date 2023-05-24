@@ -1,4 +1,5 @@
 import torch
+print(torch.version.cuda)
 import cv2
 import numpy as np
 from models.experimental import attempt_load
@@ -7,7 +8,7 @@ from utils.torch_utils import select_device
 
 # Load the YOLOv5 model
 weights = 'V20.pt'
-device = select_device('cpu') # or 'cuda:0' for GPU
+device = select_device('cuda:0') # or 'cuda:0' for GPU
 model = attempt_load(weights, device)
 
 # Set the model to evaluation mode
