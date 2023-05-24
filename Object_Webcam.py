@@ -1,5 +1,7 @@
 
 import torch
+print(torch.version.cuda)
+
 import cv2
 import numpy as np
 from models.experimental import attempt_load
@@ -7,7 +9,8 @@ from utils.general import non_max_suppression, scale_coords
 from utils.torch_utils import select_device
 
 # Load the YOLOv5 model
-weights = 'V20.pt'
+weights = 'V21.pt' # V20.pt for version 2.0, V21.pt for version 2.1
+
 # Get user input
 device_choice = int(input("Enter 1 for GPU, 2 for CPU: "))
 
@@ -22,7 +25,12 @@ model = attempt_load(weights, device)
 model.eval()
 
 # Define the classes
-classes = ['Hot spot','Uncovered area','Stub','Tapping hole','Point flame']
+if weights == 'V21.pt':
+    classes = ['Hot spot', 'Point flame', 'Stub', 'Tapping hole', 'Uncovered area']
+elif weights == 'V20.pt':
+    classes = ['Hot spot', 'Uncovered area', 'Stub', 'Tapping hole', 'Point flame']
+
+
 
 # Define the input image size
 def maintain_aspect_ratio(img, target_size):
@@ -48,9 +56,15 @@ conf_threshold = 0.4
 nms_threshold = 0.5
 
 # Open the input video
-#input_video_path = 'Resources\GoPro_Video\GX010282.MP4'
-input_video_path = 'Resources\iPhone_Video\iphone8.mp4'
-cap = cv2.VideoCapture(input_video_path)
+# #input_video_path = 'Resources\GoPro_Video\GX010282.MP4'
+# input_video_path = 'Resources\iPhone_Video\iphone8.mp4'
+# cap = cv2.VideoCapture(input_video_path)
+cap = cv2.VideoCapture(0)
+
+# Check if the webcam was opened successfully
+if not cap.isOpened():
+    print('Error: Could not open the webcam.')
+    exit()
 
 # Check if the video file was opened successfully
 if not cap.isOpened():
