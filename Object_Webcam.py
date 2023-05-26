@@ -11,6 +11,7 @@ from utils.torch_utils import select_device
 # Load the YOLOv5 model
 weights = 'V21.pt' # V20.pt for version 2.0, V21.pt for version 2.1
 
+device = select_device('cuda:0')  # Use CPU otherwise
 # Get user input
 device_choice = int(input("Enter 1 for GPU, 2 for CPU: "))
 
@@ -29,6 +30,8 @@ if weights == 'V21.pt':
     classes = ['Hot spot', 'Point flame', 'Stub', 'Tapping hole', 'Uncovered area']
 elif weights == 'V20.pt':
     classes = ['Hot spot', 'Uncovered area', 'Stub', 'Tapping hole', 'Point flame']
+elif weights == 'V10.pt':
+    classes = ['Uncovered area', 'Hot spot']
 
 
 
@@ -52,8 +55,12 @@ def maintain_aspect_ratio(img, target_size):
     return img_resized
 
 # Define the confidence threshold and non-maximum suppression threshold
-conf_threshold = 0.4
-nms_threshold = 0.5
+if weights == 'V21.pt':
+    conf_threshold = 0.4
+    nms_threshold = 0.6
+elif weights == 'V20.pt':
+    conf_threshold = 0.6
+    nms_threshold = 0.5
 
 # Open the input video
 # #input_video_path = 'Resources\GoPro_Video\GX010282.MP4'
