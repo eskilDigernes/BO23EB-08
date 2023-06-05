@@ -7,7 +7,7 @@ from utils.general import non_max_suppression, scale_coords
 from utils.torch_utils import select_device
 
 # Load the YOLOv5 model
-weights = 'V20.pt'
+weights = 'V20.pt' #V21.pt #V10.pt #V20.pt
 device = select_device('cuda:0') # or 'cuda:0' for GPU
 model = attempt_load(weights, device)
 
@@ -15,7 +15,12 @@ model = attempt_load(weights, device)
 model.eval()
 
 # Define the classes
-classes = ['Hot spot','Uncovered area','Stub','Tapping hole','Point flame']
+if weights == 'V21.pt':
+    classes = ['Hot spot', 'Point flame', 'Stub', 'Tapping hole', 'Uncovered area']
+elif weights == 'V20.pt':
+    classes = ['Hot spot', 'Uncovered area', 'Stub', 'Tapping hole', 'Point flame']
+elif weights == 'V10.pt':
+    classes = ['Uncovered area', 'Hot spot']
 
 # Define the input image size
 def maintain_aspect_ratio(img, target_size, stride=32):
@@ -93,11 +98,21 @@ for image_path in image_paths:
             result[:, :4] = scale_coords(img.shape[2:], result[:, :4], img.shape[2:]).round()
             for x1, y1, x2, y2, conf, cls in result:
                 label = classes[int(cls)]
-                print(f'{label}: {conf:.2f}')
+                conf_percent = conf * 100  # Convert confidence to percentage
+                print(f'{label}: {conf_percent:.1f}%')
                 color = class_colors[label]  # Get the color for the current class label
-                cv2.rectangle(img_vis, (int(x1), int(y1)), (int(x2), int(y2)), color, 1)
-                cv2.putText(img_vis, f'{label}: {conf:.2f}', (int(x1), int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.75,
-                            color, 1, cv2.LINE_AA)
+                cv2.rectangle(img_vis, (int(x1), int(y1)), (int(x2), int(y2)), color, 2)
+
+                # Create a background rectangle for the text
+                (text_width, text_height), _ = cv2.getTextSize(f'{label}: {conf_percent:.1f}%',
+                                                               cv2.FONT_HERSHEY_SIMPLEX, 0.50, 1)
+                cv2.rectangle(img_vis, (int(x1), int(y1) - text_height), (int(x1) + text_width, int(y1)),
+                              color, -1)
+
+                # Put the white text on the background rectangle
+                cv2.putText(img_vis, f'{label}: {conf_percent:.1f}%', (int(x1), int(y1)), cv2.FONT_HERSHEY_SIMPLEX,
+                            0.50,
+                            (255, 255, 255), 1, cv2.LINE_AA)
 
     # Add "After" label to the image with object detection
     cv2.putText(img_vis, "Detection: ON", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)

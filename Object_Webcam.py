@@ -1,4 +1,3 @@
-
 import torch
 print(torch.version.cuda)
 
@@ -9,17 +8,19 @@ from utils.general import non_max_suppression, scale_coords
 from utils.torch_utils import select_device
 
 # Load the YOLOv5 model
-weights = 'V21.pt' # V20.pt for version 2.0, V21.pt for version 2.1
+weights_choice = int(input("Enter 10 for V10, 20 for V20 and 21 for V21: "))
+if weights_choice == 10:
+    weights = 'V10.pt'
+elif weights_choice == 20:
+    weights = 'V20.pt'
+elif weights_choice == 21:
+    weights = 'V21.pt'
+else:
+    print("Invalid input. Please try again.")
+    exit()
 
 device = select_device('cuda:0')  # Use CPU otherwise
-# Get user input
-device_choice = int(input("Enter 1 for GPU, 2 for CPU: "))
 
-# Check if CUDA is available and the user has chosen GPU
-if torch.cuda.is_available() and device_choice == 1:
-    device = select_device('cuda:0')  # Use GPU if available and chosen
-else:
-    device = select_device('cpu')  # Use CPU otherwise
 model = attempt_load(weights, device)
 
 # Set the model to evaluation mode
@@ -61,12 +62,13 @@ if weights == 'V21.pt':
 elif weights == 'V20.pt':
     conf_threshold = 0.6
     nms_threshold = 0.5
+elif weights == 'V10.pt':
+    conf_threshold = 0.4
+    nms_threshold = 0.5
 
 # Open the input video
-# #input_video_path = 'Resources\GoPro_Video\GX010282.MP4'
-# input_video_path = 'Resources\iPhone_Video\iphone8.mp4'
-# cap = cv2.VideoCapture(input_video_path)
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1) # 0 for webcam 1 for external camera
+
 
 # Check if the webcam was opened successfully
 if not cap.isOpened():
