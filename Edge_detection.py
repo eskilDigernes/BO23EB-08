@@ -3,7 +3,7 @@ import numpy as np
 
 def process(img):
     img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    img_blur = cv2.GaussianBlur(img_gray, (11, 11), 10)
+    img_blur = cv2.GaussianBlur(img_gray, (11, 11), 10) #
     img_canny = cv2.Canny(img_blur, 0, 65) #img_blur is the threshold, 0
     kernel = np.ones((19, 19))
     img_dilate = cv2.dilate(img_canny, kernel, iterations=4)
