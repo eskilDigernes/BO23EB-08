@@ -9,23 +9,31 @@ from utils.general import non_max_suppression, scale_coords
 from utils.torch_utils import select_device
 
 # Load the YOLOv5 model
-weights = 'V21.pt'
-
-# Get user input
-device_choice = int(input("Enter 1 for GPU, 2 for CPU: "))
-
-# Check if CUDA is available and the user has chosen GPU
-if torch.cuda.is_available() and device_choice == 1:
-    device = select_device('cuda:0')  # Use GPU if available and chosen
+weights_choice = int(input("Enter 10 for V10, 20 for V20 and 21 for V21: "))
+if weights_choice == 10:
+    weights = 'V10.pt'
+elif weights_choice == 20:
+    weights = 'V20.pt'
+elif weights_choice == 21:
+    weights = 'V21.pt'
 else:
-    device = select_device('cpu')  # Use CPU otherwise
+    print("Invalid input. Please try again.")
+    exit()
+
+device = select_device('cuda:0')  # Use CPU otherwise
+
 model = attempt_load(weights, device)
 
 # Set the model to evaluation mode
 model.eval()
 
 # Define the classes
-classes = ['Hot spot','Point flame','Stub', 'Tapping hole','Uncovered area']
+if weights == 'V21.pt':
+    classes = ['Hot spot', 'Point flame', 'Stub', 'Tapping hole', 'Uncovered area']
+elif weights == 'V20.pt':
+    classes = ['Hot spot', 'Uncovered area', 'Stub', 'Tapping hole', 'Point flame']
+elif weights == 'V10.pt':
+    classes = ['Uncovered area', 'Hot spot']
 
 # Define the input image size
 def maintain_aspect_ratio(img, target_size):

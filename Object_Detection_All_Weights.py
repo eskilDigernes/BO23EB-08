@@ -57,7 +57,7 @@ conf_threshold = 0.4
 nms_threshold = 0.5
 
 # Open the input image
-input_image_path = 'Resources/Full_Image_set/IMG_3260.jpg'  # Modify the path according to your needs
+input_image_path = 'Resources/Full_Image_set/IMG_3273.jpg'  # Modify the path according to your needs
 img = cv2.imread(input_image_path)
 
 # Preprocess the image
